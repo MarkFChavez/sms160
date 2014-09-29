@@ -1,0 +1,4 @@
+#! /usr/bin/env ruby
+require "sms160"
+
+Sms160::Message.new.hello
