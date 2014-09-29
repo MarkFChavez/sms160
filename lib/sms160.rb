@@ -1,6 +1,7 @@
 require "sms160/version"
 require "sms160/constants"
 require "open-uri"
+require "rest_client"
 
 module Sms160
   class Message
