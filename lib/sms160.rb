@@ -54,6 +54,11 @@ module Sms160
       result
     end
 
+    def message_status(message_id)
+      response = RestClient.get(MESSAGE_STATUS_ENDPOINT, params: fetch_credentials.merge!(messageId: message_id))
+      Hash.from_xml(response)["string"]
+    end
+
     private
 
     def fetch_credentials

@@ -2,6 +2,7 @@ module Sms160
   BASE_URI = "http://www.160.com.au/api/sms.asmx"
   BALANCE_ENDPOINT = "#{BASE_URI}/api/sms.asmx/GetCreditBalance"
   SEND_MESSAGE_ENDPOINT = "#{BASE_URI}/api/sms.asmx/SendMessage"
+  MESSAGE_STATUS_ENDPOINT = "#{BASE_URI}/api/sms.asmx/GetMessageStatus"
 
   API_ERROR = [
     "Error with message",
