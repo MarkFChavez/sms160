@@ -25,6 +25,8 @@ module Sms160
       
       options = fetch_credentials.merge!(mobileNumber: to, messageText: body.to_str, sms2way: reply_to)
       response = RestClient.post(SEND_MESSAGE_ENDPOINT, options)
+      
+      binding.pry
                        
       if response.code.to_i == 200                                                         
         response = Hash.from_xml(response)["string"]                                       
