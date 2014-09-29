@@ -20,24 +20,24 @@ module Sms160
       Hash.from_xml(response)["string"]
     end
 
-    # def send                                                                               
-    #   raise "Incomplete Parameters ERROR" unless to and body and reply_to                  
+    def send                                                                               
+      raise "Incomplete Parameters ERROR" unless to and body and reply_to                  
       
-    #   options = fetch_credentials.merge!(mobileNumber: to, messageText: body.to_str, sms2way: reply_to)
-    #   response = RestClient.post("#{BASE_URI}/api/sms.asmx/SendMessage", options)
+      options = fetch_credentials.merge!(mobileNumber: to, messageText: body.to_str, sms2way: reply_to)
+      response = RestClient.post(SEND_MESSAGE_ENDPOINT, options)
                        
-    #   if response.code.to_i == 200                                                         
-    #     response = Hash.from_xml(response)["string"]                                       
+      if response.code.to_i == 200                                                         
+        response = Hash.from_xml(response)["string"]                                       
           
-    #     if response.include?("ERR") or API_ERROR.include?(response)                        
-    #       false
-    #     else
-    #       response
-    #     end
-    #   else
-    #     false
-    #   end
-    # end
+        if response.include?("ERR") or API_ERROR.include?(response)                        
+          false
+        else
+          response
+        end
+      else
+        false
+      end
+    end
 
     private
 
