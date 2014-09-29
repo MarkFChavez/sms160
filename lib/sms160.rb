@@ -23,13 +23,9 @@ module Sms160
     def send                                                                               
       raise "Incomplete Parameters ERROR" unless to and body and reply_to                  
       
-      options = fetch_credentials.merge!(mobileNumber: to, messageText: body.to_str, sms2way: reply_to)
+      options = fetch_credentials.merge!(mobileNumber: to, messageText: body, sms2way: reply_to)
       response = RestClient.post(SEND_MESSAGE_ENDPOINT, options)
 
-      puts response
-      puts response.code
-      
-                       
       if response.code.to_i == 200                                                         
         response = Hash.from_xml(response)["string"]                                       
           
@@ -41,6 +37,21 @@ module Sms160
       else
         false
       end
+    end
+
+    def bulk_send!
+      raise "Incomplete PARAMETERS errors" unless to and body and reply_to
+
+      options = fetch_credentials.merge!(messageText: body, sms2way: reply_to)
+
+      to.each do |recipient|
+        options.merge!("mobileNumber[#{recipient.object_id}]" => recipient)
+      end
+
+      response = RestClient.post(SEND_MESSAGE_ENDPOINT, options)
+      result = Hash.from_xml(response)["string"]["result"]["status"] rescue nil
+
+      result
     end
 
     private
