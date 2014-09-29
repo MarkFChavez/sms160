@@ -10,9 +10,9 @@ module Sms160
     attr_accessor :username, :password
 
     def initialize(attr = {})
-      @to = attr[:to]
-      @body = attr[:body]
-      @reply_to = attr[:reply_to]
+      attr.each do |k, v|
+        send("#{k}=", v)
+      end
     end
 
     def credit_balance
@@ -20,7 +20,7 @@ module Sms160
       Hash.from_xml(response)["string"]
     end
 
-    def send                                                                               
+    def send_message                                                                    
       raise "Incomplete Parameters ERROR" unless to and body and reply_to                  
       
       options = fetch_credentials.merge!(mobileNumber: to, messageText: body, sms2way: reply_to)
