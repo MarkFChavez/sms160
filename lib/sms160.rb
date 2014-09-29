@@ -15,7 +15,7 @@ module Sms160
     end
 
     def credit_balance(&block)
-      raise "No block given" unless block.given?
+      raise "No block given" unless block_given?
 
       response = RestClient.get(BALANCE_ENDPOINT, params: fetch_credentials)
       block.call(response)
