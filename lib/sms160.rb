@@ -17,6 +17,7 @@ module Sms160
     end
 
     def credit_balance
+      puts @options
       response = RestClient.get BALANCE_ENDPOINT, params: @options
       # Hash.from_xml(response)["string"]
       response.body
