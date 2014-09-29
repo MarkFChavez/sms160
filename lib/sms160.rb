@@ -22,8 +22,6 @@ module Sms160
       response.body
     end
 
-    private
-
     def fetch_sms_credentials
       {
         username: username,
