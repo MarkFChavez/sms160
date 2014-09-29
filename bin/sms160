@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+require "rest_client"
 require "sms160"
 
-Sms160::Message.new.hello
+sms = Sms160::Message.new
+puts sms.credit_balance
