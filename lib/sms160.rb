@@ -12,22 +12,17 @@ module Sms160
       @to = attr[:to]
       @body = attr[:body]
       @reply_to = attr[:reply_to]
-
-      @options = fetch_sms_credentials
     end
 
     def credit_balance
-      puts @options
-      response = RestClient.get BALANCE_ENDPOINT, params: @options
-      # Hash.from_xml(response)["string"]
+      response = RestClient.get BALANCE_ENDPOINT, params: fetch_credentials
       response.body
     end
 
-    def fetch_sms_credentials
-      {
-        username: username,
-        password: password
-      }
+    private
+
+    def fetch_credentials
+      { username: username, password: password }
     end
   end
 end
