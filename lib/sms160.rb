@@ -11,7 +11,7 @@ module Sms160
 
     def initialize(attr = {})
       attr.each do |k, v|
-        send("#{k}=", v)
+        self.send("#{k}=", v)
       end
     end
 
