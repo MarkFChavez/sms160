@@ -1,10 +1,9 @@
-require "sms160/version"
-require "sms160/constants"
-require "sms160/configuration"
-require "sms160/message"
+require 'sms160/version'
+require 'sms160/constants'
+require 'sms160/configuration'
+require 'sms160/message'
 
 module Sms160
-
   def self.configuration
     @configuration ||= Configuration.new
   end
@@ -12,5 +11,4 @@ module Sms160
   def self.configure
     yield configuration
   end
-
 end
